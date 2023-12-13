@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "h4r6b/LegJI1llDCc1x+rEvAdZ3I2e+c/RUbO4XGr+aQSo448gXzd14jbcfjbFKCUB8NAAl8OuTf7c9Ht3+vGw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\louise\\source\\repos\\WebApiMorningClass\\WebApiMorningClass\\WebApiMorningClass.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\louise\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\louise\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\louise\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\louise\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\louise\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\louise\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
