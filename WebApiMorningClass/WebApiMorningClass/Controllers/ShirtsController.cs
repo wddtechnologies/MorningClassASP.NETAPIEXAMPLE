@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApiMorningClass.Filters;
 using WebApiMorningClass.Models;
 using WebApiMorningClass.Models.Repositories;
 
@@ -16,18 +17,12 @@ namespace WebApiMorningClass.Controllers
             return " Reading all the shirts";
         }
         [HttpGet("{id}")]
+        [Shirt_ValidateShirtIdFilter]
         public IActionResult GetShirtById(int id)
         {
-            if(id <= 0)
-            {
-                return BadRequest();
-            }
-            var shirt = ShirtRepository.GetShirtById(id);
-            if (shirt == null)
-                return NotFound();
-
-            return Ok(shirt);
+            return Ok(ShirtRepository.GetShirtById(id));
         }
+
         [HttpPost]
         public string CreateShirt([FromForm]Shirt shirt)
         {
