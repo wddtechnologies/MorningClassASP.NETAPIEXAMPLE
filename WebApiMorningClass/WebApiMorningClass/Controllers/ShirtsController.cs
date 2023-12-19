@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApiMorningClass.Filters;
+using WebApiMorningClass.Filters.ActionFilters;
+using WebApiMorningClass.Filters.ExceptionFilters;
 using WebApiMorningClass.Models;
 using WebApiMorningClass.Models.Repositories;
 
@@ -11,39 +14,47 @@ namespace WebApiMorningClass.Controllers
     public class ShirtsController : ControllerBase
     {
         [HttpGet]
-       public string GetShirts()
+        public IActionResult GetShirts()
         {
-            return " Reading all the shirts";
+            return Ok(ShirtRepository.GetShirts());
         }
         [HttpGet("{id}")]
+        [Shirt_ValidateShirtIdFilter]
         public IActionResult GetShirtById(int id)
         {
-            if(id <= 0)
-            {
-                return BadRequest();
-            }
-            var shirt = ShirtRepository.GetShirtById(id);
-            if (shirt == null)
-                return NotFound();
-
-            return Ok(shirt);
+            return Ok(ShirtRepository.GetShirtById(id));
         }
-        [HttpPost]
-        public string CreateShirt([FromForm]Shirt shirt)
-        {
 
-            return " this is creating a shirt";
+        [HttpPost]
+        [Shirt_ValidateCreateShirtFilter]
+        public IActionResult CreateShirt([FromForm]Shirt shirt)
+        {
+            //if (shirt == null) return BadRequest()
+           // var existingShirt = ShirtRepository.GetShirtByProperties(shirt.Brand, shirt.Gender, shirt.Color, shirt.Size);
+           // if (existingShirt != null) return BadRequest();
+            ShirtRepository.AddShirt(shirt);
+            return CreatedAtAction(nameof(GetShirtById),
+                new {id = shirt.Id},
+                shirt);
          
         }
         [HttpPut ("{id}")]
-        public string UpdateShirt(int id)
+        [Shirt_ValidateShirtIdFilter]
+        [Shirt_ValidateUpdateShirtFilter]
+        [Shirt_HandleUpdateExceptionsFilter]
+        public IActionResult UpdateShirt(int id,Shirt shirt)
         {
-            return $" Updating shirt by id:  {id}";
+            
+           ShirtRepository.UpdateShirt(shirt);
+            return NoContent();
         }
         [HttpDelete("{id}")]
-        public string DeleteShirt(int id)
+        [Shirt_ValidateShirtIdFilter]
+        public IActionResult DeleteShirt(int id)
         {
-            return $" Deleting shirt by id:  {id}";
+            var shirt = ShirtRepository.GetShirtById(id);
+            ShirtRepository.DeleteShirt(id);
+            return Ok(shirt);
         }
     }
 }
